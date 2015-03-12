@@ -1,6 +1,6 @@
 # Grant Zukowski
 # Lego Lot Pricer
-# Last update 3/7/2015
+# Last update 3/11/2015
 
 # This program is designed to take up to 20 inputs with two values
 # set number and set condition
@@ -12,76 +12,76 @@ import urllib.request
 # main
 def main():
 
-    answer = input('Would you like to check lego prices? ')
+    # open the text file with all of the set numbers
+    f_input = open('Book1.txt', 'r')
 
+    # create a variable that is the first line of the file
+    line = f_input.readline()
+
+    # strip off the newline character at the end of it
+    clean_line = line.rstrip('\n')
+
+    # create a container list that all the prices can be added to    
     price_list = []
-    while answer:
-        if answer.lower() == 'y':
-            price_list.append(find_price())
-        elif answer.lower() == 'n':
-            break
-        answer = input('Would you like to check lego prices? ')
 
+    # while there is a line to read, find its price and add the price to
+    # the list, then try to read the next line
+    while line:
+        clean_line = line.rstrip('\n')
+        price_list.append(find_price(clean_line))
+
+        line = f_input.readline()
+    
+    # once all the lines have been read, add them up and print them.
     print (sum(price_list))
     
-        
-    
-    #ask the user how many lots they want to enter
-    #lots = input(int('Number of sets in lot: '))
 
-    # ask user for input
+def find_price(clean_line):
 
-    
-#put the set numbers into a list
-#put the condition input into a list
-#create an empty list to add prices to
-
-#For each input
-    #put input into a url string
-    #search html from url string for data matching a price
-    #add price to list
-#Add up all the values in the list
-#format and print the values
-
-def find_price():
-
-    # gather input
-    setNum = input("What is the set number: ")
-    if len(setNum) < 5:
+    # set the input variable and add '-1' if the number is to short
+    setNum = clean_line
+    if len(setNum) < 6:
         setNum += '-1'
 
-    condition = input("What is the condition: ")
-
+    # create a variable with the url and set number combined
     urlrequest = 'http://www.bricklink.com/catalogPG.asp?S=' + setNum
-    
+
+    # use the variable to make a request to the URL
     response = urllib.request.urlopen(urlrequest)
 
+    # create a variable and read all the html data in
     html = response.read()
 
+    # convert the html data into a string
     html = str(html)
-    
+
+    # create a place to store all of the prices
     price = []
-    
+
+    # create a place to store the individual price you want
     individual_price = []
 
-    counter = 0
+    # go through the entire html string and find any dollar sign, when you do
+    # take the 10 characters after the dollar sign and add them to price
     for i in range(0, len(html) - 40):
         if html[i] == '$':
             price.append(html[i:i+10])
 
-    if condition == 'N':
-        c = 1
-    elif condition == 'U':
-        c = 5
-    
+    # variable for new or used price.  New is c = 1, used is c = 5
+    c = 5
+
+    # go through all the characters of the string of the price you want and
+    # add anything that is a number to the price list
     for i in price[c]:
         if i.isnumeric():
             individual_price.append(str(i))
-          
+
+    # add a decimal point to the price list      
     individual_price.insert(-2,'.')
+
+    # join the entire price list together, convert it to a float, and return it
     return (float(''.join(individual_price)))
 
 
 # call main
 main()
-
