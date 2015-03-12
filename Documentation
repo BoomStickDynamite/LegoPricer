@@ -1,0 +1,31 @@
+Grant Zukowski
+Lego Lot Pricer
+Documentation
+
+How did you approach (get started with) this assignment?
+I started by typing pseudo code for how I wanted to retrieve the price.  I also used
+urllib for the first time, so I had to research and import that.  After typing my
+pseudo code, I was just randomly coding small parts of the project, and eventually
+got it to work with a N and U indicator and the ability to enter each set individually
+
+How did you test your program?
+Learning from my last assignment, I tested the program by running it in IDLE, and set
+print markers in the code so I could see if the data was being processed and handed off from
+step to step.  This made it a lot easier to understand any error messages.
+
+What works and what doesn't work?
+The lot pricing works, and I've updated it to accept a batch of lots from a text file.
+What doesn't work is that you have to manually set if the lot is used or new.
+Also, I want to put a front scraper to scrape the Ebay listing and find the set numbers
+automatically.  Also, I need to use API instead of scraping through html code because
+it will increase performance, ensure accuracy, and allow flexibility.
+
+What did you learn from this assignment? What would you do differently next time?
+
+I learned that when designing a project for a person, it is very important to understand
+where they are starting (ebay listing) and what they want to get to.  Also, it is
+very important to understand the output data (price) and where to get it, because I spent
+some time getting data from the wrong page.  Next time, I would have him walk me through his
+whole process before automating it.  Also, I will write cleaner code next time, comment
+while I go, test in IDLE, use documentation as I go, and upload all versions to Git.
+
